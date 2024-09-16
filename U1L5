@@ -1,0 +1,12 @@
+U1 L5
+Predict: 
+it would output the inputted length of the square and its area. 
+
+Modify: 
+import math
+length = input("Please input a length: ")
+length = float(length)
+areaS = math.pow(length, 2)
+areaC = (math.pi * (length / 2)/2)
+area = areaS + areaC
+print("The area of a normal window of side length", length, "is:", area)
