@@ -1,0 +1,16 @@
+L2 U4
+Make: 
+dna = input("please input the dna string: ")
+sepDNA = list(dna)
+for i in range(len(dna)):
+    if sepDNA[i] == "C":
+        sepDNA[i] = "G"
+    elif sepDNA[i] == "G":
+        sepDNA[i] = "C"
+    elif sepDNA[i] == "T":
+        sepDNA[i] = "A"
+    elif sepDNA[i] == "A":
+        sepDNA[i] = "T"
+
+for i in range(len(dna)):
+    print(sepDNA[i], end="")
