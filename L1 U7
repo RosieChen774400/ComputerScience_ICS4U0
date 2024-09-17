@@ -1,0 +1,33 @@
+L1 U7
+predict: 
+a) yes
+b) no
+modify: 
+import math
+
+end = False
+while not end:
+    x = input("Please input a whole number between 1 and 20: ")
+    x = int(x)
+    if x <= 20 and x >= 1:
+        end = True
+    else:
+        print(x, "is outside of range. Please try again")
+
+end = False
+while not end:
+    y = input("Please input another nonzero whole number between 1 and 20: ")
+    y = int(y)
+    if y <= 20 and y >= 1:
+        end = True
+    else:
+        print(y, "is outside of range. Please try again")
+    if y == 0:
+        print("A number cannot be divided my 0!")
+
+print("Now deciding if", y, "is a factor of", x, "...")
+rem = x % y
+if rem == 0:
+    print("Yes!", y, "is a factor of", x)
+else:
+    print(y, "is not a factor of", x)
