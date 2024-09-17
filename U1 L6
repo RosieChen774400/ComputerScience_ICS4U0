@@ -1,0 +1,11 @@
+U1 L6
+Algorithm: 
+year = int(input("please input birth year: "))
+age = int(input("please input age: "))
+result = (((year * 2 + 5) * 50 + age) - 250) / 100
+print(result)
+
+output: 
+please input birth year: 2007
+please input age: 16
+2007.16
