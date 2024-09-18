@@ -1,0 +1,14 @@
+U2 L2
+create: 
+inches = 10 ** 12
+(foot, inches) = divmod(inches, 12)
+(yard, foot) = divmod(foot, 3)
+(mile, yard) = divmod(yard, 1760)
+(moon, mile) = divmod(mile, 238855)
+
+print("One trillion inches is the same as going to the moon and back")
+print(moon, "times, plus an extra", mile, "miles", yard,
+      "yards", foot, "feet and", inches, "inches")
+
+-> One trillion inches is the same as going to the moon and back
+66 times, plus an extra 18398 miles 497 yards 2 feet and 4 inches
