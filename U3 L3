@@ -1,0 +1,28 @@
+U3 L3
+Predict: 
+a) print the array without '[' and ','
+B) print the array with '[' and ','
+
+modify: 
+ar2 = [[3, 4, 1, 2, 6],
+      [9, 2, 3, 7, 5],
+      [4, 2, 1, 0, 3]]
+sumAr = []
+sum = 0
+for i in range(len(ar2)):
+    ar3 = ar2[i]
+    for j in range(len(ar3)):
+        print(ar3[j], end=" ")
+        sum = sum + ar3[j]
+    sumAr.append(sum)
+    sum = 0
+    print()
+print(ar2)
+print(sumAr)
+
+output: 
+3 4 1 2 6 
+9 2 3 7 5 
+4 2 1 0 3 
+[[3, 4, 1, 2, 6], [9, 2, 3, 7, 5], [4, 2, 1, 0, 3]]
+[16, 26, 10]
