@@ -1,0 +1,18 @@
+U3 L1
+Predict: 
+a) Python
+b) P
+c) Python
+d) becuase there will be gaps because of the commas and it would have a new line, so the end="" is there to supress it. 
+e) new line
+f) index number, the letter corresponding and new line
+
+Modify: 
+progname = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis."
+space = 0
+
+for i in range(len(progname)):
+      if progname[i] == " ":
+            space += 1
+print("There are %d spaces in the text" % space)
+-> There are 9 spaces in the text
