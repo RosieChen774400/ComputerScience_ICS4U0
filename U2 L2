@@ -12,3 +12,14 @@ print(moon, "times, plus an extra", mile, "miles", yard,
 
 -> One trillion inches is the same as going to the moon and back
 66 times, plus an extra 18398 miles 497 yards 2 feet and 4 inches
+
+part2: 
+def toLower(letter):
+      letter2 = ord(letter)
+      letter2 = int(letter2)
+      if 90 >= letter2 and letter2 >= 65:
+            return chr(letter2 + 32)
+      else:
+            return " "
+
+print(toLower("A"))
