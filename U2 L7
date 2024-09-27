@@ -1,0 +1,11 @@
+U2 L7
+Make: 
+a = [7, 1, 3, 5, 2, 4, 6]
+b = []
+for i in range(5, len(a) + 5):
+      b.append(a[i % 7])
+
+print("Before: ")
+print(a)
+print("After")
+print(b)
