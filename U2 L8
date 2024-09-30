@@ -1,0 +1,80 @@
+U2 L8
+make1: 
+import math as m
+A = [3, 2, 0, -1]
+B = [5, 7, 8, 4]
+C = []
+
+for i in range(len(A)):
+      C.append(A[i] + B[i])
+print(C)
+
+magA = 0
+for i in range(len(A)):
+      magA += A[i] ** 2
+magA = m.sqrt(magA)
+
+magB = 0
+for i in range(len(B)):
+      magB += B[i] ** 2
+magB = m.sqrt(magB)
+
+print(magA + magB)
+
+magC = 0
+for i in range(len(C)):
+      magC += C[i] ** 2
+magC = m.sqrt(magC)
+print(magC)
+
+print(magA + magB, "does not equal", magC)
+#ermmmm this is probably it. I have no idea what I'm doing -\_(l-l)_/-
+
+make2: 
+import math as m
+A = [3, 2, 0, -1]
+B = [5, 7, 8, 4]
+C = []
+cMulti = 0
+
+for i in range(len(A)):
+      C.append(A[i] * B[i])
+      cMulti += C[i]
+
+print(cMulti)
+
+magA = 0
+for i in range(len(A)):
+      magA += A[i] ** 2
+magA = m.sqrt(magA)
+
+magB = 0
+for i in range(len(B)):
+      magB += B[i] ** 2
+magB = m.sqrt(magB)
+
+print(magA * magB)
+
+print("the angle between the vectors is:", cMulti / (magA * magB))
+#erm, this is probably it...
+
+make3: 
+import math as m
+
+A = [3, 2, 0, -1]
+B = [5, 7, 8, 4]
+C = []
+aAdd = 0
+
+for i in range(len(A)):
+      aAdd += A[i]
+
+print(aAdd * aAdd)
+
+magA = 0
+for i in range(len(A)):
+      magA += A[i] ** 2
+magA = m.sqrt(magA)
+mag = magA ** 2
+print(mag)
+#mmmmmmm...what did I do here???
