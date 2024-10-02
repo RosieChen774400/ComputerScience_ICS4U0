@@ -1,0 +1,70 @@
+U2 L9
+make: 
+def addMagic(mSqur, num, newSqur):
+      for i in range(len(mSqur)):
+            for j in range(len(mSqur)):
+                  newSqur[i].append(mSqur[i][j] + num)
+      return newSqur
+
+def multiMagic(mSqur, num, newSqur):
+      for i in range(len(mSqur)):
+            for j in range(len(mSqur)):
+                  newSqur[i].append(mSqur[i][j] * num)
+      return newSqur
+
+def mEqual(mSqur, equal):
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[i][j]
+            if count != equal:
+                  return False
+
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[j][i]
+            if count != equal:
+                  return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][i]
+      if count != equal:
+            return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][-(i + 1) % 3]
+      if count != equal:
+            return False
+      return True
+
+a1 = [2, 7, 6]
+a2 = [9, 5, 1]
+a3 = [4, 3, 8]
+Magic3 = [a1, a2, a3]
+ #a
+print(mEqual(Magic3, 15))
+print()
+
+addSqur = [[],[],[]]
+addNum = 3
+print(addMagic(Magic3, addNum, addSqur))
+#b
+print(mEqual(addSqur, 15 + addNum * 3))
+print("The new magic number is:", 15 + (addNum * 3))
+print()
+#c
+subSqur = [[],[],[]]
+subNum = -3
+print(addMagic(Magic3, subNum, subSqur))
+print(mEqual(subSqur, 15 + subNum * 3))
+print("The new magic number is:", 15 + (subNum * 3))
+print()
+#d
+multiSqur = [[],[],[]]
+multiNum = 3
+print(multiMagic(Magic3, multiNum, multiSqur))
+print(mEqual(multiSqur, 45))
+print("The new magic number is:", 45)
