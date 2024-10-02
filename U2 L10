@@ -1,0 +1,86 @@
+U2 L10
+make: 
+def isMagic(mSqur):
+      magicNum = 0
+      round = 0
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[i][j]
+            if round <= 0:
+                  magicNum = count
+                  round += 1
+            if count != magicNum:
+                  return False
+
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[j][i]
+            if count != magicNum:
+                  return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][i]
+      if count != magicNum:
+            return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][-(i + 1) % 3]
+      if count != magicNum:
+            return False
+      return True
+
+def addMagic(m1, m2, newSqur):
+      for i in range(len(m1)):
+            for j in range(len(m1)):
+                  newSqur[i].append(m1[i][j] + m2[i][j])
+      return newSqur
+
+a1 = [2, 7, 6]
+a2 = [9, 5, 1]
+a3 = [4, 3, 8]
+magicA1 = [a1, a2, a3]
+#a)
+magicA2 = [[],[],[]]
+addMagic(magicA1, magicA1, magicA2)
+print(isMagic(magicA2))
+print()
+
+b1 = [-2, -2, -2]
+b2 = [-2, -2, -2]
+b3 = [-2, -2, -2]
+magicB2 = [b1, b2, b3]
+magicB3 = [[],[],[]]
+addMagic(magicA1, magicB2, magicB3)
+print(isMagic(magicB3))
+print()
+
+c1 = [4, 9, 2]
+c2 = [3, 5, 7]
+c3 = [8, 1, 6]
+magicC2 = [c1, c2, c3]
+magicC3 = [[],[],[]]
+addMagic(magicA1, magicC2, magicC3)
+print(isMagic(magicC3))
+print()
+
+d1 = [6, 7, 2]
+d2 = [1, 5, 9]
+d3 = [8, 3, 4]
+magicD2 = [d1, d2, d3]
+magicD3 = [[],[],[]]
+addMagic(magicA1, magicD2, magicD3)
+print(isMagic(magicD3))
+print()
+
+e1 = [2, 9, 4]
+e2 = [7, 5, 3]
+e3 = [6, 1, 8]
+magicE2 = [e1, e2, e3]
+magicE3 = [[],[],[]]
+addMagic(magicA1, magicE2, magicE3)
+print(isMagic(magicE3))
+print()
