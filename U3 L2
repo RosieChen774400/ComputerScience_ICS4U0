@@ -1,0 +1,36 @@
+U3 L2
+make: 
+ken = [0.5, 1.4, 1]
+karen = [1, 2, 0.5]
+bought = [ken, karen]
+
+price = [2.20, 3.10, 2.60]
+
+kenMoney = 0
+karenMoney = 0
+for i in range(len(price)):
+      kenMoney += ken[i] * price[i]
+print("ken spent: %.2f" % kenMoney)
+for i in range(len(price)):
+      karenMoney += karen[i] * price[i]
+print("karen spent: %.2f" % karenMoney)
+
+make2: 
+a1 = [2, 0]
+a2 = [1, 5]
+a3 = [a1, a2]
+
+b1 = [1, 0]
+b2 = [0, 1]
+b3 = [b1, b2]
+
+c1 = []
+c2 = []
+c3 = [c1, c2]
+
+for i in range(len(a3)):
+      c1.append((a1[i] * b1[0]) + (a1[i] * b2[0]))
+for i in range(len(a3)):
+      c2.append((a2[i] * b1[1]) + (a2[i] * b2[1]))
+print(c3)
+-> [[2, 0], [1, 5]]
