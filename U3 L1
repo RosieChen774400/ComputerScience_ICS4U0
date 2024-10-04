@@ -1,0 +1,81 @@
+U3 L1
+make: 
+#this was so painful
+
+def isMagic(mSqur):
+      magicNum = 0
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[i][j]
+            if magicNum == 0:
+                  magicNum = count
+            if count != magicNum:
+                  return False
+
+      for i in range(len(mSqur)):
+            count = 0
+            for j in range(len(mSqur[i])):
+                  count += mSqur[j][i]
+            if count != magicNum:
+                  return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][i]
+      if count != magicNum:
+            return False
+
+      count = 0
+      for i in range(len(mSqur)):
+            count += mSqur[i][-(i + 1) % len(mSqur)]
+      if count != magicNum:
+            return False
+      return True
+
+def addMagic(m1, m2, newSqur):
+      for i in range(len(m1)):
+            for j in range(len(m1)):
+                  newSqur[i].append(m1[i][j] + m2[i][j])
+      return newSqur
+
+def make5x5(m, shift):
+      magic1 = m
+      magic2 = []
+      magic3 = []
+      magic4 = []
+      magic5 = []
+      for i in range(shift, len(m) + shift):
+            magic2.append(m[i % len(m)])
+      for i in range(shift + shift, len(m) + shift + shift):
+            magic3.append(m[i % len(m)])
+      for i in range(shift + shift + shift, len(m) + shift + shift + shift):
+            magic4.append(m[i % len(m)])
+      for i in range(shift + shift + shift + shift, len(m) + shift + shift + shift + shift):
+            magic5.append(m[i % len(m)])
+
+      magic = [magic1, magic2, magic3, magic4, magic5]
+      return magic
+
+
+a1 = [5, 1, 4, 2, 3]
+b1 = [15, 20, 0, 10, 5]
+
+a1 = make5x5(a1, 3)
+print(a1)
+b1 = make5x5(b1, 2)
+print(b1)
+
+print(isMagic(a1))
+
+emptSqur = [[], [], [], [], []]
+newSqur = addMagic(a1, b1, emptSqur)
+print(newSqur)
+
+print(isMagic(newSqur))
+
+-> [[5, 1, 4, 2, 3], [2, 3, 5, 1, 4], [1, 4, 2, 3, 5], [3, 5, 1, 4, 2], [4, 2, 3, 5, 1]]
+[[15, 20, 0, 10, 5], [0, 10, 5, 15, 20], [5, 15, 20, 0, 10], [20, 0, 10, 5, 15], [10, 5, 15, 20, 0]]
+True
+[[20, 21, 4, 12, 8], [2, 13, 10, 16, 24], [6, 19, 22, 3, 15], [23, 5, 11, 9, 17], [14, 7, 18, 25, 1]]
+True
