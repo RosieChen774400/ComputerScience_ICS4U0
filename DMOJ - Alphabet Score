@@ -1,0 +1,24 @@
+
+def letterCount(letter, word):
+    letterCount = 0
+    for i in range(len(word)):
+        if letter == word[i]:
+            letterCount += 1
+    return letterCount
+
+alphabet = (list(map(chr, range(97, 123))))
+
+word = (input()).lower()
+listWord = list(word)
+score = 0
+used = []
+
+for i in range(len(word)):
+    for j in range(len(alphabet)):
+        if listWord[i] == alphabet[j] and alphabet[j] not in used:
+            score += ((j + 1) * (letterCount(listWord[i], word)))
+            used.append(alphabet[j])
+            break
+print(score)
+
+#need to make it faster
