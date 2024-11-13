@@ -1,0 +1,78 @@
+U4 L3
+
+import turtle
+import math
+
+def modify(ln):
+  # Strips everything except the essential string
+  # ln = one line of data from first column to the carriage return
+  #
+  mod_string = ""
+  badChars = ['"', ','] # chars to remove
+  ln = ln.strip() # clean out non-printable chars
+  for c in ln:
+    if c not in badChars:
+      mod_string = mod_string + c
+  return mod_string # line of data should now be clean
+
+def modify2(ln):
+  # Strips everything except the essential string
+  # ln = one line of data from first column to the carriage return
+  #
+  mod_string = ""
+  badChars = ['"', ','] # chars to remove
+  ln = ln.strip() # clean out non-printable chars
+  for c in ln:
+    if c == " ":
+      mod_string = mod_string + "~"
+    elif c not in badChars:
+      mod_string = mod_string + c
+  return mod_string # line of data should now be clean
+
+#fh = open("teapot_mod.xpm", "r") #not working
+#fh = open("rocky_bullwinkle_mod.xpm", "r") #not working
+fh = open("boris_natasha_mod.xpm", "r")#working
+#fh = open("cool_smiley_mod.xpm", "r")#working
+#fh = open("smiley_emoji_mod.xpm", "r")#working
+# fh = open("teapot_mod.xpm", "r") # open a file handle #not working
+try:
+  color_data = fh.readline()
+  color_data = modify(color_data)
+  [cols, rows, colors] = color_data.split()
+  rows = int(rows)
+  cols = int(cols)
+  colors = int(colors)
+  colorData = {} # a dictionary of symbols and colors
+except ValueError:
+  [cols, rows, colors, x] = color_data.split()
+  rows = int(rows)
+  cols = int(cols)
+  colors = int(colors)
+  colorData = {} # a dictionary of symbols and colors
+
+
+for i in range(colors):
+  cLine = fh.readline()
+  cLine = modify(cLine)
+  [sym, c, color] = cLine.split()
+  colorData[sym] = str(color) # add a new dictionary entry
+size = 4
+
+turtle.tracer(0, 0)
+turtle.hideturtle()
+for i in range(rows):
+  colors = fh.readline()
+  colors = modify2(colors)
+  #print(colors)
+  colors = list(colors)
+  turtle.goto(cols * -2, -i * size + (rows * 2))
+  for j in range(cols):
+    #print(colorData[colors])
+    turtle.penup()
+    turtle.forward(size)
+    turtle.pendown()
+    turtle.dot(size, colorData[colors[j]])
+    #print(colorData[colors[j]])
+    turtle.penup()
+turtle.update()
+turtle.mainloop()
