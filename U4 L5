@@ -197,4 +197,73 @@ print(x)
 
 
 
+#with reduced fractions
+class Fraction:
+  # See slideshow for a full discussion of this code.
+  #
+  def __init__(self, num, den):
+    self.__n = num
+    self.__d = den
+
+  def getNum(self):
+    return self.__n
+
+  def getDen(self):
+    return self.__d
+
+  def setNum(self, num):
+    self.__n = num
+
+  def setDen(self, den):
+    self.__d = den
+
+  def __str__(self):
+    return "{0}/{1}".format(self.__n, self.__d)
+
+
+class Fraction2(Fraction):
+  def __init__(self, num, den):
+    self.n = num
+    self.d = den
+
+    Fraction.__init__(self, num, den)
+
+  def check(self):
+    if self.getDen() == 0:
+      return "yes"
+    else:
+      return "no"
+
+  def mult(self, multiply):
+    self.n = self.getNum()
+    self.d = self.getDen()
+    self.mul = multiply
+    return "{0}/{1}".format(self.n * self.mul, self.d * self.mul)
+
+  def multFrac(self, frac2):
+    self.n2 = frac2.getNum()
+    self.d2 = frac2.getDen()
+    self.n = self.getNum()
+    self.d = self.getDen()
+    a = self.n * self.d2
+    c = self.n2 * self.d
+    num = a + c
+    den = self.d2 * self.d
+    for i in range(den // 2, 0, -1):
+      if den % i == 0 and num % i == 0:
+        return "{0}/{1}".format(int(num / i), int(den / i))
+
+# driver code
+a = Fraction(50, 10)
+b = Fraction(20, 30)
+multiply = 2
+x = Fraction2.multFrac(a, b)
+print(a)
+print(b)
+print(x)
+
+
+
+
+
 
