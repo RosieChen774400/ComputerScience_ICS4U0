@@ -1,0 +1,56 @@
+# for finding the distance between two points
+
+import math
+class Point:
+    def __init__(self, X, Y):
+        self.__x = X
+        self.__y = Y
+      
+    def getX(self):
+        return self.__x
+
+    def getY(self):
+        return self.__y
+
+    def setX(self, X):
+        self.__x = X
+
+    def setY(self, Y):
+        self.__y = Y
+        
+
+# add code to get x, y, and 
+# a point (x, y) respecting encapsulation
+
+    def distance(self, p2):
+        self.x2 = p2.getX()
+        self.y2 = p2.getY()
+        return math.sqrt((self.__x-self.x2)**2 + (self.__y-self.y2)**2)
+    
+
+p = Point(1,2)
+p2 = Point(2,3)
+x = Point.distance(p, p2)
+print(x)
+print(Point.getX(p))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
