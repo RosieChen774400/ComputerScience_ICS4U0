@@ -1,0 +1,211 @@
+U4 L6
+
+
+#Modify/Make: 
+
+class char:
+  def __init__(self, c : str):
+    self.ch = c[0]
+    self.next = None
+
+  def __str__(self):
+    return self.ch
+
+class myStr:
+  def __init__(self, s: str):
+    self.__s = s
+    self.__head = char(self.__s[0])
+#     self.__head = None
+    chCount = 1
+    for c in self.__s:
+      if chCount == 1:
+        self.__head.next = char(c)
+        self.__C = self.__head.next
+      else:
+        self.__C.next = char(c)
+        self.__C = self.__C.next
+      chCount += 1
+    self.__len = chCount
+
+  def __str__(self):
+    self.__C = self.__head.next
+    myStr = ""
+    x = self.__head.next
+    while x != None:
+      myStr += x.ch
+      x = x.next
+    # add your code here!
+
+    return myStr
+
+S = myStr("Hello")
+print(S) # should print the string
+
+
+#Modify2: 
+
+class char:
+  def __init__(self, c : str):
+    self.ch = c[0]
+    self.next = None
+
+  def __str__(self):
+    return self.ch
+
+class myStr:
+  def __init__(self, s: str):
+    self.__s = s
+    self.__head = char(self.__s[0])
+#     self.__head = None
+    chCount = 1
+    for c in self.__s:
+      if chCount == 1:
+        self.__head.next = char(c)
+        self.__C = self.__head.next
+      else:
+        self.__C.next = char(c)
+        self.__C = self.__C.next
+      chCount += 1
+    self.__len = chCount
+    
+  def len(self):
+      return self.__len
+
+  def __str__(self):
+    self.__C = self.__head.next
+    myStr = ""
+    x = self.__head.next
+    while x != None:
+      myStr += x.ch
+      x = x.next
+    # add your code here!
+
+    return myStr
+
+  def isacii(self):
+    myStr = ""
+    x = self.__head.next
+    ascii = True
+    while x != None:
+      if ord(x.ch) < 65 or ord(x.ch) > 122:
+          ascii = False
+      x = x.next
+    if ascii == True:
+        return True
+    else:
+        return False
+  
+  def isalpha(self):
+    x = self.__head.next
+    alpha = True
+    if ord(x.ch) >= 65 and ord(x.ch) <= 90:
+        x = x.next
+        while x != None:
+            if ord(x.ch) >= 65 and ord(x.ch) <= 90:
+              x = x.next
+            else:
+                return False
+        return True
+    
+    if ord(x.ch) >= 97 and ord(x.ch) <= 122:
+        x = x.next
+        while x != None:
+            if ord(x.ch) >= 97 and ord(x.ch) <= 122:
+              x = x.next
+            else:
+                return False
+        return True
+
+S = myStr("hello")
+print(S) # should print the string
+x = myStr.isalpha(S)
+print(x)
+
+
+#Modify3: 
+
+class char:
+  def __init__(self, c : str):
+    self.ch = c[0]
+    self.next = None
+
+  def __str__(self):
+    return self.ch
+
+class myStr:
+  def __init__(self, s: str):
+    self.__s = s
+    self.__head = char(self.__s[0])
+#     self.__head = None
+    chCount = 1
+    for c in self.__s:
+      if chCount == 1:
+        self.__head.next = char(c)
+        self.__C = self.__head.next
+      else:
+        self.__C.next = char(c)
+        self.__C = self.__C.next
+      chCount += 1
+    self.__len = chCount
+    
+  def len(self):
+      return self.__len
+
+  def __str__(self):
+    self.__C = self.__head.next
+    myStr = ""
+    x = self.__head.next
+    while x != None:
+      myStr += x.ch
+      x = x.next
+    # add your code here!
+
+    return myStr
+
+  def isacii(self):
+    myStr = ""
+    x = self.__head.next
+    ascii = True
+    while x != None:
+      if ord(x.ch) < 65 or ord(x.ch) > 122:
+          ascii = False
+      x = x.next
+    if ascii == True:
+        return True
+    else:
+        return False
+  
+  def isalpha(self):
+    x = self.__head.next
+    alpha = True
+    if ord(x.ch) >= 65 and ord(x.ch) <= 90:
+        x = x.next
+        while x != None:
+            if ord(x.ch) >= 65 and ord(x.ch) <= 90:
+              x = x.next
+            else:
+                return False
+        return True
+    
+    if ord(x.ch) >= 97 and ord(x.ch) <= 122:
+        x = x.next
+        while x != None:
+            if ord(x.ch) >= 97 and ord(x.ch) <= 122:
+              x = x.next
+            else:
+                return False
+        return True
+    
+  def allUpper(self):
+    self.__C = self.__head.next
+    myStr = ""
+    x = self.__head.next
+    while x != None:
+      myStr += chr(ord(x.ch) - 32)
+      x = x.next
+    return myStr
+
+S = myStr("hello")
+print(S) # should print the string
+x = myStr.allUpper(S)
+print(x)
