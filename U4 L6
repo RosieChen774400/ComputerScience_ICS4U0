@@ -210,6 +210,9 @@ print(S) # should print the string
 x = myStr.allUpper(S)
 print(x)
 
+
+
+
 #modify part3 - updated: 
 class char:
   def __init__(self, c : str):
