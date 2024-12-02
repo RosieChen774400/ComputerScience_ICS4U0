@@ -37,6 +37,64 @@ print(Point.getX(p))
 
 
 
+#_______________________________________________________________________________________________
+
+
+class Node:
+    def __init__(self, data = None):
+        self.data = data
+        self.next = None
+
+class Point:
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+        self.__c = (self.__x, self.__y)
+        self.__head = None
+        if self.__head == None:
+            self.__head = Node(self.__c)
+            self.__coords = self.__head.next
+        else:
+            self.__coords.next = Node(self.__c)
+            self.__coords = self.__coords.next
+    
+    def getX(self):
+        return self.__x
+
+    def getY(self):
+        return self.__y
+    
+    def getC(self):
+        return self.__c
+    
+    def __tuple__(self):
+        x = self.__head.next
+        while x != None:
+            print(self.getC(), "-> ")
+            x = x.next
+        return self.getC()
+  
+fh = open("Points.txt", "r")
+line = fh.readline()
+line = line.replace(" ", "")
+line = line.replace("(", "")
+line = line.replace(")", "")
+line = line.split(",")
+coords = []
+for i in range(len(line) - 1):
+    if i % 2 == 0:
+        temp = []
+        temp.append(int(line[i]))
+        temp.append(int(line[i + 1]))
+        coords.append(temp)
+print(coords)
+
+for i in range(len(coords)):
+    a = Point(coords[i][0], coords[i][1])
+    a = Point(coords[i][0], coords[i][1])
+print(a)
+
+
 
 
 
