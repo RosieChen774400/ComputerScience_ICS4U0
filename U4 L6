@@ -226,7 +226,6 @@ class myStr:
   def __init__(self, s: str):
     self.__s = s
     self.__head = char(self.__s[0])
-#     self.__head = None
     chCount = 1
     for c in self.__s:
       if chCount == 1:
