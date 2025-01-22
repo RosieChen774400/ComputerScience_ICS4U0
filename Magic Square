@@ -1,0 +1,174 @@
+
+"""
+ICS4U0-1
+Magic Square Maker~✰
+Rosie(Ruoxi) Chen
+774400
+---Dictionary<3---
+isMagic - check if the magic square is magic
+mSqur - the magic squre you check if it is magic or not
+magicNum - the magic number of that magic Square
+count - the magic number for that row, coloum, or diaganal
+
+makeArr - make an empty 2d array
+size - the size of the 2d array
+arr - the array you are appending the array to
+
+scrambledArr - makes a scrambled array with the numbers from 1 to size
+size - the size of the scrambled array
+end - to check for the end of the loop when the array is full
+arr - the array you are appending to and returning
+num = the number you are appending
+
+makeMagic - make a magic square
+intArr - the first array in the magic square
+shift - the number of shifts
+arrReturn - the magic square returned, initally as an empty 2d array
+
+addMagic - adds the magic square together
+m1 - the first magic square you are adding
+m2 - the second magic square you are adding
+newSqur - the added magic square
+
+magicNum - finds the magic number of the magic square
+magicSqur - the magic square you are using to find the magic number
+
+primNum - the number you are accepting and are all prim numbers
+end - to check if the loop has ended or not
+magicSize - the size of the magic square
+magic1 - the first magic square
+randArr1 - the first array of the magic square that is scrambled
+magic2 - the second magic square
+randArr2 - the first array of the second magic square that is scrambled
+temp - a temperary array of the multiples of the magic size in an array
+magic3 - the magic square that is the added magic square
+
+"""
+
+import random as r
+
+#for checking if it is magic
+def isMagic(mSqur):#needs a magic square
+    magicNum = 0
+#rows
+    for i in range(len(mSqur)):
+        count = 0
+        for j in range(len(mSqur[i])):
+            count += mSqur[i][j]
+        if magicNum == 0:
+            magicNum = count
+        if count != magicNum:
+            return False
+#coloums
+    for i in range(len(mSqur)):
+        count = 0
+        for j in range(len(mSqur[i])):
+            count += mSqur[j][i]
+        if count != magicNum:
+            return False
+#main diagonal
+    count = 0
+    for i in range(len(mSqur)):
+        count += mSqur[i][i]
+    if count != magicNum:
+        return False
+#other diagonal
+    count = 0
+    for i in range(len(mSqur)):
+        count += mSqur[i][-(i + 1) % len(mSqur)]
+    if count != magicNum:
+        return False
+    return True#returns true if the magic square is magic and false if not
+
+#makes 2d array
+def makeArr(size):#needs a number to make the size of the 2d array
+    arr = []
+    for i in range(size):
+        arr.append([])
+    return arr#returns empty array
+
+#makes scrambled array(1d)
+def scrambledArr(size):#needs a number to make the size of the array
+    end = False
+    arr = []
+    while not end:
+        num = r.randint(1, size)
+        if num not in arr:
+            arr.append(num)
+            if len(arr) == size:
+                return arr#returns an scrambled array with the inputted size
+
+#makes magic square
+def makeMagic(intArr, shift, arrReturn):#needs an intial array to go off of, the number of shifts in each row, and an empty array to return in.
+    for i in range(len(intArr)):
+        for j in range(shift + (i * shift), len(intArr) + shift + (i * shift)):
+            arrReturn[i].append(intArr[j % len(intArr) - 1])
+    return arrReturn#returns a fully made magic square
+
+#adds magic square
+def addMagic(m1, m2, newSqur):#needs two fully made magic squares/two  2d arrays, and an empty array to append the square to.
+    for i in range(len(m1)):
+        for j in range(len(m1)):
+            newSqur[i].append(m1[i][j] + m2[i][j])
+    return newSqur#returns the added magic square
+
+#finds the magic number
+def magicNum(magicSqur):#needs a magic square to find the magic number
+    magicNum = 0
+    for i in range(1, (len(magicSqur) ** 2) + 1):
+        magicNum += i
+    magicNum = int(magicNum / len(magicSqur))
+    return magicNum#returns the magic number of the magic square inputted
+
+primNum = [5, 7, 11, 13, 17, 19]
+
+#main
+end = False
+while not end:
+    try:
+        magicSize = int(input("Please input a prime number N between 5 and 19 for the dimensions: "))
+        if magicSize in primNum:#checks if the value is correct/within rang
+            end = True
+        elif magicSize >= 5 and magicSize <= 19:
+            print("This is not a prime number, please try again. ")
+        else:
+            print("Out of range, please try again. ")
+    except ValueError:
+        print("Not a number, please try again. ")
+
+#first arr
+magic1 = makeArr(magicSize)#makes empty array
+randArr1 = scrambledArr(magicSize)#makes scrambled array
+magic1 = makeMagic(randArr1, magicSize - 2, magic1)#makes the first magic square
+
+#sec arr
+magic2 = makeArr(magicSize)#make empty array
+randArr2 = []
+
+temp = []
+for i in range(magicSize):#make an array with the multiples of the magic number
+    temp.append(i * magicSize)
+
+for i in range(magicSize):#makes a scrambled array with the numbers of the multiple, with the indexes of the random array made previously
+    randArr2.append(temp[randArr1[i] - 1])
+
+magic2 = makeMagic(randArr2, magicSize - 3, magic2)#makes magic square 2
+
+#third arr
+magic3 = makeArr(magicSize)#makes empty array
+magic3 = addMagic(magic1, magic2, magic3)#adds the magic squares together
+
+#print
+for i in range(magicSize):
+    for j in range(magicSize):
+        print("%-3.d" % magic3[i][j], end=" ")
+    print()
+print("The magic number of %dx%d is %d. " % (magicSize, magicSize, magicNum(magic3)))
+if isMagic(magic3):#checks if magic and prints yes or no.
+    print("A %dx%d magic square is magic. " % (magicSize, magicSize))
+else:
+    print("A %dx%d magic square is not magic. " % (magicSize, magicSize))
+
+
+
+
