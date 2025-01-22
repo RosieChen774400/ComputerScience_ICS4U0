@@ -1,0 +1,30 @@
+
+"""
+ICS4U0-1
+IVT Finder~✰
+Rosie(Ruoxi) Chen
+774400
+---Variable Dictionary<3---
+IVT - finds the IVT of the given function
+Polynomial - turns the given constants into a polynomial function
+P - object polynomial
+I - the variable that stores the object
+x - the varibale that stores the object that guesses the zeros
+.f() - finds the y value with the given x value
+get_order() - gives the degree of the polynomial
+"""
+
+from IVT import *
+'''
+P = Polynomial([0, 0, 1, 2, 0, 3, 0, 0])
+print(P)
+for i in range(10):
+ print(i, P.f(i))
+print(P.get_order())'''
+
+I = IVT([1,0,-4])
+print(I)
+x = I.findZero(-5,5)
+print(x)
+print(I.f(x))
+
