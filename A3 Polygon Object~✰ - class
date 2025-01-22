@@ -1,0 +1,345 @@
+
+"""
+ICS4U0-1
+A3 Polygon Object~✰
+Rosie(Ruoxi) Chen
+774400
+---Variable Dictionary<3---
+point - creates the nodes for the shape
+    x - the x value inputed
+    y - the y value inputted
+    __x - the incapsulated x value
+    __y - the incapsulated y value
+    next - the pointer to the next node/creates a new node
+    getX - the getter for __x
+    getY - the getter for __y
+    valid - checks if the values inputted is int/float returns True or False
+        val - True if the value is int/float and False if value in not int/float
+    line - returns the value inputted as a string
+
+
+Polygon - creates a shape
+    init - needs nothing
+         __sides - the number of sides in the shape
+         __vertices - the number of points in the shape
+         __head - the head of the LL
+         __distance -  the distance between two points
+         __regularPolygon - if the polygon is a regular polygon or not
+
+    add_point - adds a point to the shape, needs an x and y as float
+        __head.next - the head of LL
+        __v - the values in LL
+        __v.next - makes new node in LL
+
+    isPolygon - checks if the shape is a regular polygon or not
+        p1 - first point in a line of the shape
+        count - the number of sides of the shape
+        p1X - X of the first point of the line of the shape
+        p1Y - Y of the first point of the line of the shape
+        p2X - X of the second point of the line of the shape
+        p2Y - Y of the second point of the line of the shape
+        firstDistance - distance of the first line of the shape
+        correctAngle - the angle of a regular polygon with the number of sides of the shape
+        a1 - point one of shape
+        a2 - point two of shape
+        b1 - point two of shape
+        b2 - point three of shape
+        c1 - point three of shape
+        a - side one of shape
+        b - side two of shape
+        c - side three of shape
+        angle - internal angle of shape
+
+    perimeter - finds the perimeter of the shape
+        p1 - first point in a line of the shape
+        count - the number of sides of the shape
+        p1X - X of the first point of the line of the shape
+        p1Y - Y of the first point of the line of the shape
+        p2X - X of the second point of the line of the shape
+        p2Y - Y of the second point of the line of the shape
+        distanceSum - the sum all the distance of sides in the shape
+        a - private listed list of the perimeter function
+        a1X - X of the first point of the line of the shape
+        a1Y - Y of the first point of the line of the shape
+        firstDistance - distance of the first line of the shape
+
+    area - finds the area of the shape
+        p1 - first point in a line of the shape
+        count - the number of sides of the shape
+        p1X - X of the first point of the line of the shape
+        p1Y - Y of the first point of the line of the shape
+        p2X - X of the second point of the line of the shape
+        p2Y - Y of the second point of the line of the shape
+        firstDistance - distance of the first line of the shape
+        distanceSum - the sum all the distance of sides in the shape
+        n1 - sum of the first side of the algorethem
+        area1 - the first side of the first part of the algorethem
+        area2 - the second side of the first part of the algorethem
+        n2 - sum of the second side of the algorethem
+        area3 - the first side of the second part of the algorethem
+        area4 - the second side of the second part of the algorethem
+
+    draw - draws out the shape on turtle
+        turtle.tracer - hides the process of drawing the shape
+        turtle.hideturtle() - hides the turtle(the pen that draws the point)
+        turtle.penup() - stop drawing the shape
+        point - the listed list of the draw function
+        turtle.goto - tells the pen to go to this coordinate
+        turtle.update() - stop hiding the shape and show it to the viewer
+        turtle.mainloop() - keeps the shape on screen until you click out
+
+    __str__ - prints out the LL
+        x - internal variable to traverse the LL from head
+        printOut - a string you build the LL to print
+
+"""
+
+#the node/pointer
+class point:
+    def __init__(self, x: float = None, y: float = None):#needs a x and y value
+        self.__x = x
+        self.__y = y
+        self.next = None
+
+    def getX(self): #getter for x
+        return self.__x
+
+    def getY(self): # getter for y
+        return self.__y
+
+    def valid(self): #checks if the values sent into the class is correct(int or float)
+        val = False
+        if self[0] == int(self[0]):
+            val = True
+        elif self[0] == float(self[0]):
+            val = True
+        if self[1] is int(self[1]):
+            val = True
+        elif self[1] is float(self[1]):
+            val = True
+
+        return val #returns true if the value is valid and false if not valid
+
+    def __str__(self): #returns the inputted value(tuple) in string
+        line = "{}".format(self.getX())
+        return line
+
+
+class Polygon: #the shape created by the points
+    def __init__(self):
+        self.__sides = 0 #counts the sides
+        self.__vertices = 0 #count the number of points
+        self.__head = point() #head = to null
+        self.__distance = 0
+        self.__regularPolygon = True
+
+    # adds point to the object/creates the verticies of the shape
+    def add_point(self, x: float, y: float): #needs an x and y value
+        import math as m
+        if self.__vertices == 0: #checks if it is the first point
+            self.__head.next = point(x, y)
+            self.__v = self.__head.next
+
+        else:
+            self.__v.next = point(x, y)
+            self.__v = self.__v.next
+
+        self.__vertices += 1 #counts the points and for checking if it's the first point
+
+    def isPolygon(self):#tests if the polygon is regular or not, needs nothing
+        import math as m
+        p1 = self.__head.next#head of the LL
+        count = 0
+        while p1 != None:
+            if count == 0:
+                p1X = p1.getX()#point one
+                p1Y = p1.getY()
+                # print(p1X, p1Y)
+                p1 = p1.next
+                p2X = p1.getX()#point two
+                p2Y = p1.getY()
+                # print(p2X, p2Y)
+                firstDistance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))#the  distance between the first two points
+            else:
+                p1X = p1.getX()
+                p1Y = p1.getY()
+                #print(p1X, p1Y)
+                p1 = p1.next
+                try:
+                    p2X = p1.getX()
+                    p2Y = p1.getY()
+                except:
+                    p2 = self.__head.next
+                    p2X = p2.getX()
+                    p2Y = p2.getY()
+                #print(p2X, p2Y)
+                self.__distance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))#the rest of the distances
+                if self.__distance != firstDistance:#checks if the distance matches with the first distance
+                    self.__regularPolygon = False
+            count += 1#counts the number of points/sides
+
+
+
+        return self.__regularPolygon#returns true if the polygon is regular and false if the polygon is not regular
+
+
+    def perimeter(self):#returns the perimeter of the shape, needs nothing
+        import math as m
+        distanceSum = 0
+        p1 = self.__head.next#head of LL
+        count = 0
+        while p1 != None:
+            if count == 0:
+                p1X = p1.getX()
+                p1Y = p1.getY()
+                # print(p1X, p1Y)
+                p1 = p1.next
+                p2X = p1.getX()
+                p2Y = p1.getY()
+                # print(p2X, p2Y)
+                firstDistance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))
+                distanceSum += firstDistance
+            else:
+                p1X = p1.getX()
+                p1Y = p1.getY()
+                #print(p1X, p1Y)
+                p1 = p1.next
+                try:
+                    p2X = p1.getX()
+                    p2Y = p1.getY()
+                except:
+                    a = self.__head.next
+                    a1X = a.getX()
+                    a1Y = a.getY()
+                    lastDistance = m.sqrt(((a1X - p1X) ** 2) + ((a1Y - p1Y) ** 2))
+                    distanceSum += lastDistance
+                    if self.__regularPolygon == True:
+                        distanceSum = lastDistance * count
+                        return distanceSum#if the shape is regular, return the side distance x number of sides
+                    else:
+                        return distanceSum#if the shape is not regular, add all the sides together and return this number
+
+                #print(p2X, p2Y)
+                self.__distance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))
+                distanceSum += self.__distance
+
+                if self.__distance != firstDistance:
+                    self.__regularPolygon = False
+
+                correctAngle = ((count - 2) * 180) / count
+                b1 = self.__head.next
+                b2 = b1.next
+                angle = m.degrees(m.atan2((b1.getY() - b2.getY()), ((b1.getX() - b2.getX()) ** 2)))
+                angle = abs(angle)
+                if correctAngle != angle:
+                    self.__regularPolygon = False
+            count += 1
+
+    def area(self):#finds the area of the shape, needs nothing
+        import math as m
+        distanceSum = 0
+        p1 = self.__head.next
+        count = 0
+        while p1 != None:
+            if count == 0:
+                p1X = p1.getX()
+                p1Y = p1.getY()
+                # print(p1X, p1Y)
+                p1 = p1.next
+                p2X = p1.getX()
+                p2Y = p1.getY()
+                # print(p2X, p2Y)
+                firstDistance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))
+                distanceSum += firstDistance
+            else:
+                p1X = p1.getX()
+                p1Y = p1.getY()
+                #print(p1X, p1Y)
+                p1 = p1.next
+                try:
+                    p2X = p1.getX()
+                    p2Y = p1.getY()
+                except:#if theres nothing next in the list, then the pointer go back to the start.
+                    a = self.__head.next
+                    a1X = a.getX()
+                    a1Y = a.getY()
+                    lastDistance = m.sqrt(((a1X - p1X) ** 2) + ((a1Y - p1Y) ** 2))
+                    distanceSum += lastDistance
+                    if lastDistance != firstDistance:
+                        self.__regularPolygon = False
+
+                    correctAngle = ((count - 2) * 180) / count
+                    b1 = self.__head.next
+                    b2 = b1.next
+                    angle = m.degrees(m.atan2((b1.getY() - b2.getY()), ((b1.getX() - b2.getX()) ** 2)))
+                    angle = abs(angle)
+                    if correctAngle != angle:
+                        self.__regularPolygon = False
+
+                    if self.__regularPolygon == True:
+                        return (self.__vertices * (firstDistance ** 2)) // (4 * (m.tan(m.radians(180 / self.__vertices))))#if the polygon is regular, uses this formula to give the area
+                    else:
+                        n1 = 0#the sum if the first part of the algorethem
+                        area1 = self.__head.next
+                        area2 = self.__head.next
+                        area2 = area2.next
+                        while area1 != None:
+                            try:
+                                #print(area1.getX(), area2.getY())
+                                #print(area2.getY())
+                                n1 += area1.getX() * area2.getY()
+                                area1 = area1.next
+                                area2 = area2.next
+                            except:
+                                area2 = self.__head.next
+
+                        n2 = 0#the sum of the second part of the algorethem
+                        area3 = self.__head.next
+                        area4 = self.__head.next
+                        area3 = area3.next
+                        while area4 != None:
+                            try:
+                                #print(area3.getX(), area4.getY())
+                                #print(area2.getY())
+                                n2 += area3.getX() * area4.getY()
+                                area3 = area3.next
+                                area4 = area4.next
+                            except:
+                                area3 = self.__head.next
+                        return abs((n1 - n2) / 2)#if the shape is not regular, it uses this algoresthem and returns the area.
+
+                #print(p2X, p2Y)
+                self.__distance = m.sqrt(((p2X - p1X) ** 2) + ((p2Y - p1Y) ** 2))
+                distanceSum += self.__distance
+
+                if self.__distance != firstDistance:#checks if the distance matches with the first distance.
+                    self.__regularPolygon = False
+            count += 1
+
+    def draw(self):#draws the shape inputted, needs nothing
+        import turtle
+        turtle.tracer(0, 0)
+        turtle.hideturtle()
+        turtle.penup()
+        point = self.__head.next
+        turtle.goto(point.getX(), point.getY())
+        while point != None:#goes through the LL for the coordinates
+            turtle.goto(point.getX() * 30, point.getY() * 30)
+            turtle.pendown()
+            point = point.next
+        point = self.__head.next
+        turtle.goto(point.getX() * 30, point.getY() * 30)
+        turtle.update()#for showing and keeping the shape on the screen
+        turtle.mainloop()
+        return ""#return the shape drawn on turtle
+
+    #prints out linked list
+    def __str__(self):
+        x = self.__head.next
+        printOut = ""
+        while x != None:
+            printOut += "(%s, %s)" %(x.getX(), x.getY())
+            if x.next != None:
+                printOut += " -> "
+            x = x.next
+        return printOut #returns linked list
