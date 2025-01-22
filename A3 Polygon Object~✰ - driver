@@ -1,0 +1,62 @@
+
+"""
+ICS4U0-1
+A3 Polygon Object~✰
+Rosie(Ruoxi) Chen
+774400
+---Variable Dictionary<3---
+Objects - classes for point(node) and Polygon(the shape)
+
+getNumeric - turns a string that looks like a tuple into a tuple and returns a tuple
+    S - string that looks like tuple
+    x - the x value in the tuple
+    y - the y value in the tuple
+
+fh - data pulled from the file is stored here
+polydata - fh but stripped of the unwanted charcters
+myPoly - the Polygon class
+x - a single tuple pulled from polydata
+add_point - adds a point to the object
+isPolygon() - checks if its a regular polyogn
+perimeter() - finds the perimeter of shape
+area() - finds the area of shape
+draw() - draws out the shape in turtle
+
+"""
+
+
+from poly import *
+
+# takes string and makes it into a tuple
+def getNumeric(S: str):#needs a strip with (x,y) format
+    S = S.strip("()")
+    [x, y] = S.split(",")
+    try:
+        x = int(x)
+    except:
+        x = float(x)
+    try:
+        y = int(y)
+    except:
+        y = float(y)
+    return (x, y)#returns tuple of x and y
+
+
+fh = open("a2.txt", "r")  # open file
+polydata = fh.readline().strip()# reads the first line of file
+fh.close()
+polydata = polydata.split(", ") #makes a list of strings that look like tuples
+myPoly = Polygon()
+for i in range(len(polydata)):
+    try:
+        x = getNumeric(polydata[i]) #turns a tuple like string into a tuple
+        myPoly.add_point(x[0], x[1]) #adds point to object
+    except ValueError:
+        print(polydata[i], "is not correct value")
+
+print(myPoly) #prints linked list
+print(myPoly.isPolygon())#prints if it is regular polygon or not
+print(myPoly.perimeter())#prints the perimeter of shape
+print(myPoly.area())#prints the area of the shape
+print(myPoly.draw())#draws out the shape with turtle
+
