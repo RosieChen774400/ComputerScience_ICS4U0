@@ -1,0 +1,74 @@
+
+"""
+ICS4U0-1
+IVT Finder~✰
+Rosie(Ruoxi) Chen
+774400
+---Variable Dictionary<3---
+Polynomial - turns the given constants into a polynomial function
+    init - takes the array of coeffiecents and cuts off the inital zeros and returns the array
+        co - the array given by the user that may contain zeros in the beginning
+        startEnd - checks if the array went past the inital zeros
+        self.__coefficents - the new array of coefficents without the inital zeros
+    getCo() - the getter for self.__coefficents
+    get_order - returns the degree of polynomial
+    f - returns the f(x) of the polynomial
+        x - the x of the function
+        func - the y value of the given x value
+    __str__ - takes the coeffients and returns the polynomial in string and in proper format
+        function - the string the string is building on
+        first - check if it's the first coefficent of the function
+
+"""
+
+class Polynomial:
+    def __init__(self, co):#needs an array of coefficents of int or float
+        startEnd = False
+        self.__coefficents = []#the array of the coefficents without the inital zeros
+        for i in range(len(co)):
+            if type(co[i]) is int or type(co[i]) is float:
+                if co[i] != 0 and startEnd == False:#checks if it is not zero, if not, then it means the loop is past the inital zeros and can now start appending the coefficents
+                    startEnd = True
+                if startEnd == True:#after the inital zeros, starts to append the rest of the numbers
+                    self.__coefficents.append(co[i])
+            else:
+                self.__coefficents = "Invalid Input"#if one of the values in the array is not an int or float, returns the string: 'Invalid Input'
+                break
+
+    def getCo(self):#the getter for self.__coefficents
+        return self.__coefficents
+
+    def get_order(self):
+        if self.__coefficents == "Invalid Input":#checks if the input is valid
+            return self.__coefficents#if not valid, return string: 'Invalid Input'
+        return len(self.getCo()) - 1 #returns the degree of the polynomial(int)
+
+    def f(self, x):#returns f(x), needs the x value in int or float
+        func = 0.0#the f(x) value
+        if self.__coefficents == "Invalid Input":#checks if the input is valid
+            return self.__coefficents#if not valid, return string: 'Invalid Input'
+        if type(x) is int or type(x) is float:#checks if it is the right type
+            for i in range(len(self.getCo())):
+                func += self.getCo()[i] * (x ** (len(self.getCo()) - i - 1))#the formula for the function
+            return func#returns int f(x)
+        else:
+            return x#returns the given x value if the x was not int or float
+
+    def __str__(self):#returns the object in string
+        function = ''
+        first = True
+        if self.__coefficents == "Invalid Input":#checks if the input is valid
+            return self.__coefficents#if not valid, return: 'Invalid Input'
+        for i in range(len(self.getCo())):
+            if first == True:#checks if it is the leading coeffient so it doesn't add the additional "+"
+                function += str(self.getCo()[i])
+                first = False
+            elif self.getCo()[i] >= 0 and not first:#if the coefficent it postive
+                function += ' + '
+                function += str(self.getCo()[i])
+            else:#if the coefficent is negitive
+                function += ' - '
+                function += str(self.getCo()[i]).strip('-')
+            function += 'x^'
+            function += str(len(self.getCo()) - i - 1)
+        return function#returns the function in standard form in string
