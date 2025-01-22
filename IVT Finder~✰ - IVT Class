@@ -1,0 +1,60 @@
+
+"""
+ICS4U0-1
+IVT Finder~✰
+Rosie(Ruoxi) Chen
+774400
+---Variable Dictionary<3---
+Polynomial - turns the given constants into a polynomial function
+IVT - finds the IVT of the given function
+    findZero - finds the zero between the given x values
+    x1 - the first given x value
+    x2 - the second given x value
+    x3 - the average between x1 and x2
+    end - starts the loop and ends when end is True
+    solutions - the array of solutions for the root
+    temp - a temperary variable for the previous x3 before getting replaced by the current
+    self.f() - returns the f(x) of the polynomial
+
+"""
+
+from Polynomial import *
+
+class IVT(Polynomial):
+    def findZero(self, x1, x2):#finds the zero between x1 and x2 that is int or float
+        x3 = 0#the average between x1 and x2 and the root
+        end = False#starts the loop
+        solutions = []#place where all x3's that existed
+        
+        try:
+            while not end:
+                temp = x3
+                solutions.append(x3)
+                if x1 == x2:#if x1 is equal to x2, only check one number
+                    if round(self.f(x1), 3) == 0:#checks if the number is valid
+                        return x1#if f(x1) == 0, return int x1
+                if self.f(x1) == 0 and (type(x1) is int or type(x1) is float):#checks if the f(x1) is equal to zero
+                    return x1#if f(x1) == 0, return int x1
+                if self.f(x2) == 0 and (type(x2) is int or type(x2) is float):#checks if the f(x2) is equal to zero
+                    return x2#if f(x2) == 0, return int x2
+
+                if (self.f(x1) > 0 and self.f(x2) < 0) or (self.f(x1) < 0 and self.f(x2) > 0):#checks if f(x1) and f(x2) have opposite signs
+                    x3 = (x1 + x2) / 2#gets the average of x1 and x2
+                    if (self.f(x3) < 0 and self.f(x1) < 0) or (self.f(x3) > 0 and self.f(x1) > 0):#checks if f(x3) and f(x1) have opposite signs
+                        x1 = x3#replace x1 with x3
+                    elif (self.f(x3) < 0 and self.f(x2) < 0) or (self.f(x3) > 0 and self.f(x2) > 0):#checks if f(x3) and f(x2) have opposite signs
+                        x2 = x3#replace x2 with x3
+                    else:
+                        return x3#if none above apply, it means f(x3) == 0, which is the answer and returns the integer (x3)
+
+                else:
+                    return "No Roots"#if f(x1) and f(x2) does not have opposite signs, it means no roots and returns string: 'No Roots'
+                if temp == x3:#if the previous x3 == to current x3, then if means there cannot be more averges and the number is stuck.
+                    for i in range(len(solutions)):#checks all the x3's that existed
+                        if round(self.f(solutions[i]), 3) == 0.000:#checks the x3's by order until it finds one where rounding it to the thousanth is == to 0
+                            return solutions[i]#returns the integer x3 where rounding it to the thousanth == to 0
+                    return x3#if none of the above work, just return the most accurate number(int x3)
+
+            return x3#returns int x3 if all the above does not catch the number user inputted
+        except:
+            return "Invalid Input"#returns string:'Invalid Input' this if the inputted values is not int or float
